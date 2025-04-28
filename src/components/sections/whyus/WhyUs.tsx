@@ -2,6 +2,7 @@
 import SectionTitle from '@/components/utils/SectionTitle'
 import Button from '@/components/utils/Button'
 import Text from '@/components/utils/Text'
+import getObfuscatedEmail from '@/utils/emailObfuscator'
 
 // utils
 import { navigateToSection } from '@/utils/accessibility'
@@ -12,7 +13,10 @@ const WhyUs: React.FC = () => {
   }
 
   const mailTo = () => {
-    window.open('mailto:contact@support-informatique.ch', '_blank')
+    const email = getObfuscatedEmail()
+      .replace(/<[^>]*>/g, '')
+      .replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(dec))
+    window.open(`mailto:${email}`, '_blank')
   }
 
   return (
@@ -39,7 +43,7 @@ const WhyUs: React.FC = () => {
           type='filled'
           onClick={scrollToOurServices}
         />
-        <Button text='Nous contacter' type='outlined' onClick={mailTo}/>
+        <Button text='Nous contacter' type='outlined' onClick={mailTo} />
       </div>
     </div>
   )

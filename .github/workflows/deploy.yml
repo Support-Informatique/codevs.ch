@@ -2,7 +2,7 @@ name: Deploy to Production
 
 on:
   push:
-    branches: 
+    branches:
       - prod
   workflow_dispatch:
 
@@ -10,21 +10,31 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: "[⚙️] Checkout"
-      uses: actions/checkout@v3
+      - name: '[⚙️] Checkout'
+        uses: actions/checkout@v3
 
-    - name: "[📦] Install dependencies"
-      run: npm install
+      - name: '[📦] Install dependencies'
+        run: npm install
 
-    - name: "[🔧] Build"
-      run: npm run build
+      - name: '[🔧] Build'
+        run: npm run build
 
-    - name: "[🚀] Deploy to server" 
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SUPPORT_INFORMATIQUE_DEPLOYMENT_HOST }}
-        username: ${{ secrets.SUPPORT_INFORMATIQUE_DEPLOYMENT_USER }}
-        key: ${{ secrets.SUPPORT_INFORMATIQUE_DEPLOYMENT_SSH_PRIVATE_KEY }}
-        source: "dist/*"
-        target: ${{ vars.SUPPORT_INFORMATIQUE_DEPLOYMENT_FOLDER }}
-        strip_components: 1
+      - name: '[🚀] Deploy to support-informatique.ch'
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SUPPORT_INFORMATIQUE_DEPLOYMENT_HOST }}
+          username: ${{ secrets.SUPPORT_INFORMATIQUE_DEPLOYMENT_USER }}
+          key: ${{ secrets.SUPPORT_INFORMATIQUE_DEPLOYMENT_SSH_PRIVATE_KEY }}
+          source: 'dist/*'
+          target: ${{ vars.SUPPORT_INFORMATIQUE_DEPLOYMENT_FOLDER }}
+          strip_components: 1
+
+      - name: '[🚀] Deploy to codevs.ch'
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SUPPORT_INFORMATIQUE_DEPLOYMENT_HOST }}
+          username: ${{ secrets.SUPPORT_INFORMATIQUE_DEPLOYMENT_USER }}
+          key: ${{ secrets.SUPPORT_INFORMATIQUE_DEPLOYMENT_SSH_PRIVATE_KEY }}
+          source: 'dist/*'
+          target: ${{ vars.CODEVS_DEPLOYMENT_FOLDER }}
+          strip_components: 1

@@ -21,6 +21,7 @@ import ocpv from '@/assets/images/clients/ocpv.png'
 import soc from '@/assets/images/clients/soc.png'
 import laRotisserie from '@/assets/images/clients/la_rotisserie.png'
 import coupeDeNoel from '@/assets/images/clients/coupe_de_noel.png'
+import fcjf from '@/assets/images/clients/fcjf.jpg'
 
 const logos = [
   logistock,
@@ -41,7 +42,8 @@ const logos = [
   ocpv,
   soc,
   laRotisserie,
-  coupeDeNoel
+  coupeDeNoel,
+  fcjf
 ]
 
 const OurClients: React.FC = () => {

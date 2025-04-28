@@ -16,7 +16,7 @@ const OurTeam: React.FC = () => {
         />
         <TeamMember
           name='Elwan Mayencourt'
-          title='Développeur'
+          title='Fondateur & Développeur'
           techs={['reactjs', 'python']}
           avatar={2}
           linkedin='https://www.linkedin.com/in/elwan-mayencourt/'

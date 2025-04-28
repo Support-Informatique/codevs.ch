@@ -1,5 +1,6 @@
 // components
 import { BsLinkedin, BsGithub } from 'react-icons/bs'
+import getObfuscatedEmail from '@/utils/emailObfuscator'
 
 // images
 import logo from '@/assets/images/logo-support-informatique-light.svg'
@@ -26,7 +27,7 @@ const Footer: React.FC = () => {
           <div className='flex flex-row gap-x-2 mb-4'>
             <a
               className='hover:scale-110 transform transition-all'
-              href='https://www.linkedin.com/company/supportinformatique/'
+              href='https://www.linkedin.com/company/codevs-ch/'
             >
               <BsLinkedin className='text-xl md:text-2xl' />
             </a>
@@ -38,18 +39,15 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <p className='font-normal'>1700 Fribourg, Suisse</p>
-          <a
+          <div
             className='text-secondary'
-            href='mailto:contact@support-informatique.ch'
-          >
-            contact@support-informatique.ch
-          </a>
-          <p className='font-normal'>Fondé par Lionel Ding et Carlos Rouibaa</p>
+            dangerouslySetInnerHTML={{ __html: getObfuscatedEmail() }}
+          />
         </div>
       </div>
       <div className='bg-background w-full p-2'>
         <p className='text-darkText font-bold md:font-extrabold text-center text-sm md:text-base'>
-          © 2023 Support-Informatique - All Rights Reserved.
+          © {new Date().getFullYear()} CODEVS Sàrl. Tous droits réservés.
         </p>
       </div>
     </div>
