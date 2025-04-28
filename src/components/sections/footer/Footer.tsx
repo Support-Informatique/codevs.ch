@@ -1,5 +1,6 @@
 // components
 import { BsLinkedin, BsGithub } from 'react-icons/bs'
+import getObfuscatedEmail from '@/utils/emailObfuscator'
 
 // images
 import logo from '@/assets/images/logo-support-informatique-light.svg'
@@ -38,9 +39,10 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <p className='font-normal'>1700 Fribourg, Suisse</p>
-          <a className='text-secondary' href='mailto:contact@codevs.ch'>
-            contact@codevs.ch
-          </a>
+          <div
+            className='text-secondary'
+            dangerouslySetInnerHTML={{ __html: getObfuscatedEmail() }}
+          />
         </div>
       </div>
       <div className='bg-background w-full p-2'>

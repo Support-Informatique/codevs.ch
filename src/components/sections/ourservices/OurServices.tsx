@@ -2,10 +2,14 @@
 import SectionTitle from '@/components/utils/SectionTitle'
 import Service from '@/components/sections/ourservices/Service'
 import Button from '@/components/utils/Button'
+import getObfuscatedEmail from '@/utils/emailObfuscator'
 
 const OurServices: React.FC = () => {
   const mailTo = () => {
-    window.open('mailto:contact@codevs.ch', '_blank')
+    const email = getObfuscatedEmail()
+      .replace(/<[^>]*>/g, '')
+      .replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(dec))
+    window.open(`mailto:${email}`, '_blank')
   }
 
   return (
