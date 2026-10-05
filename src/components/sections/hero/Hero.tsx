@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
             }}
           />
         </div>
-        <div className='flex flex-col justify-around items-center h-full gap-y-40 overflow-hidden pb-15 pt-5 md:pb-0'>
+        <div className='flex flex-col justify-around items-center h-full gap-y-40 overflow-hidden pt-5'>
           <img
             src={darkLogo}
             alt='codevs blue logo'

@@ -63,7 +63,7 @@ const Service: React.FC<ServiceProps> = ({
       whileInView='onscreen'
       variants={animation}
       viewport={{ once: true, amount: 0.8 }}
-      className='flex flex-col border-[1px] border-black border-opacity-20 w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 rounded-lg gap-3 p-5'
+      className='flex flex-col border-[1px] border-black/20 w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 rounded-lg gap-3 p-5'
     >
       <img
         src={iconImg}
@@ -80,7 +80,7 @@ const Service: React.FC<ServiceProps> = ({
           />
         )}
       </div>
-      <Text type='lightblue-text' className='leading-5'>
+      <Text type='lightblue-text' className='leading-5 md:leading-7'>
         {description}
       </Text>
     </motion.div>
