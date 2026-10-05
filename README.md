@@ -27,15 +27,21 @@ We follow the best practices for CI/CD using GitHub Actions.
 
 ### Linting Check
 
-Every push to the `main` branch triggers a linting check using the `npm run lint` command. This helps in maintaining a clean, error-free codebase.
+Every push to the `main` branch installs the committed pnpm lockfile with `pnpm install --frozen-lockfile`, audits dependencies, checks types, and runs `pnpm run lint`.
 
 ![lint](https://github.com/Support-Informatique/support-informatique.ch/actions/workflows/lint.yml/badge.svg)
 
 ### Automatic Deployment
 
-Any push to the `prod` branch triggers an automatic deployment to our live site. Before the deployment, we also run a `npm run lint` command to ensure that the production version is error-free and ready for deployment.
+Any push to the `prod` branch triggers an automatic deployment to both live sites. CD uses Node.js 24 and the pinned pnpm version to install `pnpm-lock.yaml` with `--frozen-lockfile`, runs `pnpm audit`, and builds with `pnpm run build` (including lint and TypeScript checks).
 
 ![deploy](https://github.com/Support-Informatique/support-informatique.ch/actions/workflows/deploy.yml/badge.svg)
+
+## Dependency maintenance
+
+Use pnpm (the version in `packageManager`) and commit `pnpm-lock.yaml`; there is no npm lockfile. Run `pnpm audit`, `pnpm typecheck`, and `pnpm build` after updates.
+
+React Router 7 and Vite 6 replace the vulnerable older versions. Tailwind CSS 4 and TypeScript ESLint 8 remove the unpatched `braces` dependency. Tailwind uses `@tailwindcss/postcss`, loads the existing theme through `@config`, and declares dynamic mountain backgrounds with `@source inline`. The CSS requires Safari 16.4+, Chrome 111+, or Firefox 128+. The YAML override keeps Vite's dependency on a patched release.
 
 ## 📖 License
 

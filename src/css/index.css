@@ -1,9 +1,9 @@
 /* To remove the VSCode unknown warning */
 /* https://www.codeconcisely.com/posts/tailwind-css-unknown-at-rules/ */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@config '../../tailwind.config.cjs';
+@source inline('bg-line-mountains-peak bg-line-mountains-horizon');
 
 :root {
   font-family: Montserrat, Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -37,11 +37,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-secondary bg-opacity-60 rounded-full;
+  @apply bg-secondary/60 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-opacity-80;
+  @apply bg-secondary/80;
 }
 
 body {

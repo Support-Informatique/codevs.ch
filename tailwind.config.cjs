@@ -32,7 +32,5 @@ module.exports = {
       }
     }
   },
-  // This is because we define which background image to use dynamically
-  safelist: ['bg-line-mountains-peak', 'bg-line-mountains-horizon'],
   plugins: []
 }

@@ -15,7 +15,7 @@ const WhyUs: React.FC = () => {
   const mailTo = () => {
     const email = getObfuscatedEmail()
       .replace(/<[^>]*>/g, '')
-      .replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(dec))
+      .replace(/&#(\d+);/g, (_, dec: string) => String.fromCharCode(Number(dec)))
     window.open(`mailto:${email}`, '_blank')
   }
 

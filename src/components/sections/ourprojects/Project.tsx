@@ -50,10 +50,10 @@ const Project: React.FC<ProjectProps> = ({
     <div
       className={`${
         order === 'left' ? 'xl:flex-row' : 'xl:flex-row-reverse'
-      } z-10 flex flex-wrap justify-between flex-col-reverse border border-black border-opacity-20 gap-y-8 bg-lightCard rounded-[20px] w-11/12 lg:w-10/12 xl:w-8/12 relative p-5`}
+      } z-10 flex flex-wrap justify-between flex-col-reverse border border-black/20 gap-y-8 bg-lightCard rounded-[20px] w-11/12 lg:w-10/12 xl:w-8/12 relative p-5`}
     >
       <img src={getImage()} className='w-full xl:w-4/6 object-contain z-10' alt='project website screenshot' />
-      <div className='flex flex-col justify-center items-center w-full xl:w-1/6 flex-grow gap-y-4 px-12 text-center'>
+      <div className='flex flex-col justify-center items-center w-full xl:w-1/6 grow gap-y-4 px-12 text-center'>
         <Text type='card-title' className='font-black'>
           {title}
         </Text>
