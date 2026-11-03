@@ -38,7 +38,7 @@ const Hero: React.FC = () => (
             <img src={lionel} alt='Lionel' className='size-14 rounded-full object-cover ring-4 ring-background' />
           </div>
           <p className='max-w-md text-lg leading-snug text-ink/70'>
-            On est Elwan et Lionel. On travaille pour des associations, des PME et des commerces de
+            Nous sommes Elwan et Lionel. Nous travaillons pour des associations, des PME et des commerces de
             toute la Suisse romande.
           </p>
         </motion.div>

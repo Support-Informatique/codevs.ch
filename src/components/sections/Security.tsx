@@ -59,7 +59,7 @@ const Security: React.FC = () => (
           dark
           eyebrow='Cybersécurité'
           title='Tests d’intrusion et audits de sécurité'
-          intro='On teste vos sites, applications et serveurs comme le ferait un attaquant, avec votre accord. Vous recevez un rapport avec ce qu’il faut corriger, et comme on est aussi développeurs, on peut vous aider à le faire.'
+          intro='Nous testons vos sites, applications et serveurs comme le ferait un attaquant, avec votre accord. Vous recevez un rapport avec ce qu’il faut corriger, et comme nous sommes aussi développeurs, nous pouvons vous aider à le faire.'
         />
         <Reveal>
           <ul className='mt-10 divide-y divide-white/10 border-y border-white/10'>

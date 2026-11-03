@@ -14,7 +14,7 @@ const Team: React.FC = () => (
       <SectionHeading
         eyebrow='Qui sommes-nous'
         title='Nous, c’est Elwan et Lionel.'
-        intro='On a fondé CODEVS Sàrl à Fribourg. On s’occupe nous-mêmes de chaque projet, du premier rendez-vous à la mise en ligne.'
+        intro='Nous avons fondé CODEVS Sàrl à Fribourg et nous nous occupons nous-mêmes de chaque projet, du premier rendez-vous à la mise en ligne.'
       />
       <div className='grid grid-cols-2 gap-4 sm:gap-6'>
         {people.map((p, i) => (

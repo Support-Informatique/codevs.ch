@@ -49,7 +49,7 @@ const Work: React.FC = () => (
       <SectionHeading
         eyebrow='Réalisations'
         title='Quelques réalisations'
-        intro='Des sites et des outils qu’on a faits pour des clients de la région.'
+        intro='Des sites et des outils réalisés pour des clients de la région.'
       />
 
       <Reveal className='mt-14'>
@@ -70,7 +70,7 @@ const Work: React.FC = () => (
         <Reveal delay={0.1} className='lg:pt-16'>
           <p className='leading-relaxed text-ink/70'>
             À Salavaux, Saint-Aubin et Faoug, les clients scannent leurs articles à la borne et paient
-            par carte sur le terminal. On a développé tout le système, de la borne à la gestion des ventes.
+            par carte sur le terminal. CODEVS a développé tout le système, de la borne à la gestion des ventes.
           </p>
           <ul className='mt-6 space-y-3'>
             {fermePoints.map(p => (
@@ -93,21 +93,25 @@ const Work: React.FC = () => (
       </div>
 
       <Reveal className='mt-24 sm:mt-32'>
-        <h3 className='text-sm font-semibold uppercase tracking-wider text-ink/45'>Et aussi</h3>
-        <ul className='mt-4 border-b border-ink/10'>
+        <div className='flex flex-wrap items-end justify-between gap-x-8 gap-y-2'>
+          <h3 className='text-2xl font-bold sm:text-3xl'>D’autres projets</h3>
+          <p className='text-ink/55'>Une petite sélection parmi plus de 20&nbsp;clients.</p>
+        </div>
+        <ul className='-mx-5 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0'>
           {moreProjects.map(p => (
-            <li key={p.url} className='border-t border-ink/10'>
-              <a
-                href={p.url}
-                target='_blank'
-                rel='noreferrer'
-                className='group grid gap-1 py-5 sm:grid-cols-[14rem_1fr_auto] sm:items-center sm:gap-8'
-              >
-                <span className='font-semibold transition-colors group-hover:text-primary'>{p.title}</span>
-                <span className='text-ink/60'>{p.description}</span>
-                <span className='hidden items-center gap-1 text-sm text-ink/40 transition-colors group-hover:text-primary sm:inline-flex'>
-                  {p.url.replace(/^https:\/\/(app\.)?/, '')} <HiArrowUpRight />
-                </span>
+            <li key={p.url} className='w-[75%] shrink-0 snap-start sm:w-[42%] lg:w-auto'>
+              <a href={p.url} target='_blank' rel='noreferrer' className='group block'>
+                <img
+                  src={p.image}
+                  alt={`Aperçu de ${p.title}`}
+                  loading='lazy'
+                  className='aspect-[16/10] w-full rounded-xl object-cover object-top shadow-xl shadow-ink/15 ring-1 ring-ink/10 transition duration-500 group-hover:-translate-y-1'
+                />
+                <p className='mt-4 flex items-center justify-between gap-2 font-semibold transition-colors group-hover:text-primary'>
+                  {p.title}
+                  <HiArrowUpRight className='shrink-0 text-ink/30 transition group-hover:text-primary' />
+                </p>
+                <p className='mt-1 text-sm leading-relaxed text-ink/60'>{p.description}</p>
               </a>
             </li>
           ))}

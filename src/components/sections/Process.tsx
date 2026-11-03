@@ -2,9 +2,9 @@ import { Container, Reveal, SectionHeading } from '@/components/ui'
 
 const steps = [
   { title: 'Premier rendez-vous', text: 'Un café ou un appel, gratuit.' },
-  { title: 'Offre', text: 'Ce qu’on propose, le délai et le prix.' },
-  { title: 'Développement', text: 'On vous montre régulièrement où on en est.' },
-  { title: 'Mise en ligne', text: 'On publie et on s’occupe de la maintenance.' }
+  { title: 'Offre', text: 'Notre proposition, le délai et le prix.' },
+  { title: 'Développement', text: 'Nous vous montrons régulièrement l’avancement.' },
+  { title: 'Mise en ligne', text: 'Nous publions et assurons la maintenance.' }
 ]
 
 const Process: React.FC = () => (

@@ -56,7 +56,7 @@ const Products: React.FC = () => (
       <SectionHeading
         eyebrow='Nos produits'
         title='Nos propres produits'
-        intro='À côté des projets clients, on développe aussi nos propres outils. On les utilise tous les jours.'
+        intro='À côté des projets clients, CODEVS développe aussi ses propres outils. Nous les utilisons tous les jours.'
       />
 
       <div className='mt-14 space-y-6'>
@@ -110,10 +110,10 @@ const Products: React.FC = () => (
                 </span>
                 <span className='text-sm text-white/55'>Notre outil de surveillance</span>
               </div>
-              <h3 className='mt-7 text-3xl font-bold sm:text-4xl'>On surveille vos sites en permanence.</h3>
+              <h3 className='mt-7 text-3xl font-bold sm:text-4xl'>Vos sites surveillés en permanence.</h3>
               <p className='mt-4 leading-relaxed text-white/70'>
-                Wigud vérifie en continu les sites et serveurs qu’on gère. S’il y a un problème, on reçoit
-                une alerte et on s’en occupe.
+                Wigud vérifie en continu les sites et serveurs que nous gérons. Au moindre problème,
+                nous recevons une alerte et intervenons.
               </p>
               <ul className='mt-8 grid grid-cols-2 gap-3'>
                 {wigudChecks.map(c => (
@@ -124,7 +124,7 @@ const Products: React.FC = () => (
                 ))}
               </ul>
               <p className='mt-10 border-t border-white/10 pt-8 text-white/70'>
-                <strong className='text-white'>Inclus</strong> pour les sites qu’on héberge ou maintient.
+                <strong className='text-white'>Inclus</strong> pour les sites que nous hébergeons ou maintenons.
               </p>
             </div>
           </article>
