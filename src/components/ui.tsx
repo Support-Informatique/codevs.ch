@@ -101,15 +101,16 @@ export const BrowserFrame: React.FC<{
   </div>
 )
 
-// Stylised view of the Fribourg Pre-Alps, looking south from the city
-const backRidge = '0,210 80,200 150,190 210,160 250,135 280,110 300,92 320,106 360,130 400,145 440,138 470,120 495,132 540,150 590,140 640,120 690,95 720,80 735,70 760,85 800,102 840,115 880,130 930,140 980,132 1030,118 1080,102 1110,88 1140,100 1190,120 1250,140 1320,158 1380,170 1440,180'
-const frontRidge = '0,255 120,245 260,230 380,220 520,215 640,210 760,200 860,180 900,168 940,180 1040,205 1160,220 1300,235 1440,245'
+// View of the Fribourg Pre-Alps looking south from the city (east on the left).
+// Peak x follows the real bearing from Fribourg (145° to 201°), peak height follows altitude.
+const backRidge = '0,190 60,150 100,118 140,86 175,108 220,135 290,150 380,165 460,160 540,150 620,142 700,135 760,140 830,112 870,88 904,70 935,94 965,125 991,115 1020,135 1080,142 1150,132 1220,116 1260,108 1300,101 1340,122 1390,150 1440,170'
+const frontRidge = '0,250 150,240 300,228 450,215 560,195 640,160 700,132 728,124 760,135 820,165 900,195 1000,215 1150,230 1300,240 1440,248'
 const peaks = [
-  { name: 'Moléson', alt: '2002', x: 300, y: 92 },
-  { name: 'Dent de Broc', alt: '1829', x: 470, y: 120 },
-  { name: 'Vanil Noir', alt: '2389', x: 735, y: 70 },
-  { name: 'La Berra', alt: '1719', x: 900, y: 168 },
-  { name: 'Kaiseregg', alt: '2185', x: 1110, y: 88 }
+  { name: 'Kaiseregg', alt: '2185', x: 140, y: 86, row: 0 },
+  { name: 'La Berra', alt: '1719', x: 728, y: 124, row: 0 },
+  { name: 'Vanil Noir', alt: '2389', x: 904, y: 70, row: 0 },
+  { name: 'Dent de Broc', alt: '1829', x: 991, y: 115, row: 1 },
+  { name: 'Moléson', alt: '2002', x: 1300, y: 101, row: 0 }
 ]
 const line = (pts: string) => `M${pts.replace(/ /g, ' L')}`
 const area = (pts: string) => `${line(pts)} L1440,280 L0,280 Z`
@@ -132,8 +133,8 @@ export const Panorama: React.FC<{ dark?: boolean, labels?: boolean }> = ({ dark 
           <g className='max-md:hidden'>
             {peaks.map(p => (
               <g key={p.name}>
-                <line x1={p.x} x2={p.x} y1={32} y2={p.y - 10} strokeDasharray='2 4' className='stroke-ink/25' />
-                <text x={p.x} y={22} textAnchor='middle' className='fill-ink/55 text-[13px] font-medium'>
+                <line x1={p.x} x2={p.x} y1={32 + p.row * 22} y2={p.y - 10} strokeDasharray='2 4' className='stroke-ink/25' />
+                <text x={p.x} y={22 + p.row * 22} textAnchor='middle' className='fill-ink/55 text-[13px] font-medium'>
                   {p.name} <tspan className='fill-ink/30'>{p.alt}</tspan>
                 </text>
               </g>
