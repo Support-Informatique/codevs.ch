@@ -93,10 +93,7 @@ const Work: React.FC = () => (
       </div>
 
       <Reveal className='mt-24 sm:mt-32'>
-        <div className='flex flex-wrap items-end justify-between gap-x-8 gap-y-2'>
-          <h3 className='text-2xl font-bold sm:text-3xl'>D’autres projets</h3>
-          <p className='text-ink/55'>Une petite sélection parmi plus de 20&nbsp;clients.</p>
-        </div>
+        <h3 className='text-2xl font-bold sm:text-3xl'>D’autres projets</h3>
         <ul className='-mx-5 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0'>
           {moreProjects.map(p => (
             <li key={p.url} className='w-[75%] shrink-0 snap-start sm:w-[42%] lg:w-auto'>

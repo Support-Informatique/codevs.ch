@@ -4,8 +4,8 @@ import lionel from '@/assets/team/lionel.webp'
 import { Container, Reveal, SectionHeading } from '@/components/ui'
 
 const people = [
-  { name: 'Elwan Mayencourt', photo: elwan, role: 'Co-fondateur', linkedin: 'https://www.linkedin.com/in/elwan-mayencourt/' },
-  { name: 'Lionel Ding', photo: lionel, role: 'Co-fondateur', linkedin: 'https://www.linkedin.com/in/lionel-ding' }
+  { name: 'Elwan Mayencourt', photo: elwan, role: 'Ingénieur, co-fondateur', linkedin: 'https://www.linkedin.com/in/elwan-mayencourt/' },
+  { name: 'Lionel Ding', photo: lionel, role: 'Ingénieur, co-fondateur', linkedin: 'https://www.linkedin.com/in/lionel-ding' }
 ]
 
 const Team: React.FC = () => (
@@ -14,7 +14,7 @@ const Team: React.FC = () => (
       <SectionHeading
         eyebrow='Qui sommes-nous'
         title='Nous, c’est Elwan et Lionel.'
-        intro='Nous avons fondé CODEVS Sàrl à Fribourg et nous nous occupons nous-mêmes de chaque projet, du premier rendez-vous à la mise en ligne.'
+        intro='Deux ingénieurs qui ont fondé CODEVS Sàrl à Fribourg. Nous nous occupons nous-mêmes de chaque projet, du premier rendez-vous à la mise en ligne.'
       />
       <div className='grid grid-cols-2 gap-4 sm:gap-6'>
         {people.map((p, i) => (

@@ -1,7 +1,7 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
-import { HiCheck } from 'react-icons/hi2'
+import { HiCheck, HiPlus } from 'react-icons/hi2'
 import charmey from '@/assets/work/jeunesse-charmey.webp'
 import payerne from '@/assets/work/10km-payerne.webp'
 import schweizer from '@/assets/work/schweizer-solaire.webp'
@@ -117,9 +117,22 @@ const services = [
   }
 ]
 
+const CYCLE_MS = 6000
+
 const Services: React.FC = () => {
   const [active, setActive] = useState(0)
+  const [auto, setAuto] = useState(true)
+  const listRef = useRef<HTMLUListElement>(null)
+  const inView = useInView(listRef, { amount: 0.5 })
   const Visual = services[active].Visual
+
+  // Desktop only: cycle through the services until the visitor picks one
+  const cycling = auto && inView && window.matchMedia('(min-width: 1024px)').matches
+  useEffect(() => {
+    if (!cycling) return
+    const t = setTimeout(() => setActive(a => (a + 1) % services.length), CYCLE_MS)
+    return () => clearTimeout(t)
+  }, [active, cycling])
   return (
     <section id='services' className='py-24 sm:py-32'>
       <Container>
@@ -131,19 +144,35 @@ const Services: React.FC = () => {
 
         <div className='mt-14 grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16'>
           <Reveal>
-            <ul className='space-y-2'>
+            <ul ref={listRef} className='space-y-2'>
               {services.map((s, i) => {
                 const open = i === active
                 return (
-                  <li key={s.title} className={`border-l-2 pl-5 transition-colors sm:pl-7 ${open ? 'border-primary' : 'border-ink/10'}`}>
+                  <li key={s.title} className='relative border-l-2 border-ink/10 pl-5 sm:pl-7'>
+                    {open && (
+                      <motion.span
+                        key={cycling ? `${active}-run` : 'full'}
+                        initial={{ scaleY: cycling ? 0 : 1 }}
+                        animate={{ scaleY: 1 }}
+                        transition={{ duration: cycling ? CYCLE_MS / 1000 : 0, ease: 'linear' }}
+                        className='absolute top-0 -left-[2px] h-full w-0.5 origin-top bg-primary'
+                      />
+                    )}
                     <button
                       type='button'
-                      onClick={() => setActive(i)}
+                      onClick={() => { setActive(i); setAuto(false) }}
                       aria-expanded={open}
-                      className={`flex w-full items-baseline gap-4 py-3 text-left font-display text-2xl font-bold transition-colors sm:text-3xl ${open ? 'text-ink' : 'text-ink/35 hover:text-ink/70'}`}
+                      className={`group flex w-full items-baseline gap-4 py-3 text-left font-display text-2xl font-bold transition-colors sm:text-3xl ${open ? 'text-ink' : 'text-ink/35 hover:text-ink/70'}`}
                     >
                       <span className='font-display text-sm text-secondary'>0{i + 1}</span>
                       {s.title}
+                      <span
+                        className={`ml-auto flex size-8 shrink-0 items-center justify-center self-center rounded-full text-base ring-1 transition ${
+                          open ? 'rotate-45 text-primary ring-primary/30' : 'text-ink/40 ring-ink/15 group-hover:text-primary'
+                        }`}
+                      >
+                        <HiPlus />
+                      </span>
                     </button>
                     <AnimatePresence initial={false}>
                       {open && (
