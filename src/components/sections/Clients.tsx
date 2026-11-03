@@ -1,7 +1,7 @@
 import { clientLogos } from '@/data/data'
 
 const Clients: React.FC = () => (
-  <section aria-label='Ils nous font confiance' className='pb-8 sm:pb-20'>
+  <section aria-label='Ils nous font confiance' className='bg-white pt-16 pb-16 sm:pt-20'>
     <p className='text-center text-sm font-medium text-ink/50'>
       Ils nous ont fait confiance
     </p>

@@ -101,6 +101,50 @@ export const BrowserFrame: React.FC<{
   </div>
 )
 
+// Stylised view of the Fribourg Pre-Alps, looking south from the city
+const backRidge = '0,210 80,200 150,190 210,160 250,135 280,110 300,92 320,106 360,130 400,145 440,138 470,120 495,132 540,150 590,140 640,120 690,95 720,80 735,70 760,85 800,102 840,115 880,130 930,140 980,132 1030,118 1080,102 1110,88 1140,100 1190,120 1250,140 1320,158 1380,170 1440,180'
+const frontRidge = '0,255 120,245 260,230 380,220 520,215 640,210 760,200 860,180 900,168 940,180 1040,205 1160,220 1300,235 1440,245'
+const peaks = [
+  { name: 'Moléson', alt: '2002', x: 300, y: 92 },
+  { name: 'Dent de Broc', alt: '1829', x: 470, y: 120 },
+  { name: 'Vanil Noir', alt: '2389', x: 735, y: 70 },
+  { name: 'La Berra', alt: '1719', x: 900, y: 168 },
+  { name: 'Kaiseregg', alt: '2185', x: 1110, y: 88 }
+]
+const line = (pts: string) => `M${pts.replace(/ /g, ' L')}`
+const area = (pts: string) => `${line(pts)} L1440,280 L0,280 Z`
+
+export const Panorama: React.FC<{ dark?: boolean, labels?: boolean }> = ({ dark = false, labels = false }) => {
+  const draw = {
+    initial: { pathLength: 0 },
+    whileInView: { pathLength: 1 },
+    viewport: { once: true },
+    transition: { duration: 2.4, ease: [0.22, 1, 0.36, 1] as const }
+  }
+  return (
+    <div className='overflow-hidden' aria-hidden='true'>
+      <svg viewBox='0 0 1440 280' className='-ml-[50%] block w-[200%] max-w-none md:ml-0 md:w-full'>
+        <path d={area(backRidge)} className={dark ? 'fill-white/[0.04]' : 'fill-[#e4eef3]'} />
+        <motion.path d={line(backRidge)} fill='none' strokeWidth={1.2} className={dark ? 'stroke-white/25' : 'stroke-navy/30'} {...draw} />
+        <path d={area(frontRidge)} className={dark ? 'fill-night' : 'fill-white'} />
+        <motion.path d={line(frontRidge)} fill='none' strokeWidth={2} className={dark ? 'stroke-sky/60' : 'stroke-primary'} {...draw} />
+        {labels && (
+          <g className='max-md:hidden'>
+            {peaks.map(p => (
+              <g key={p.name}>
+                <line x1={p.x} x2={p.x} y1={32} y2={p.y - 10} strokeDasharray='2 4' className='stroke-ink/25' />
+                <text x={p.x} y={22} textAnchor='middle' className='fill-ink/55 text-[13px] font-medium'>
+                  {p.name} <tspan className='fill-ink/30'>{p.alt}</tspan>
+                </text>
+              </g>
+            ))}
+          </g>
+        )}
+      </svg>
+    </div>
+  )
+}
+
 export const Container: React.FC<{ children: ReactNode, className?: string }> = ({ children, className = '' }) => (
   <div className={`mx-auto w-full max-w-7xl px-5 sm:px-8 ${className}`}>{children}</div>
 )

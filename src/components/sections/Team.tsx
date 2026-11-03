@@ -10,30 +10,31 @@ const people = [
 
 const Team: React.FC = () => (
   <section id='equipe' className='bg-white py-24 sm:py-32'>
-    <Container className='grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:items-center'>
+    <Container className='grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-20'>
       <SectionHeading
         eyebrow='Qui sommes-nous'
         title='Nous, c’est Elwan et Lionel.'
         intro='On a fondé CODEVS Sàrl à Fribourg. On s’occupe nous-mêmes de chaque projet, du premier rendez-vous à la mise en ligne.'
       />
-      <Reveal className='grid grid-cols-2 gap-4'>
-        {people.map(p => (
-          <a
-            key={p.name}
-            href={p.linkedin}
-            target='_blank'
-            rel='noreferrer'
-            className='group rounded-3xl bg-background p-5 ring-1 ring-line transition hover:ring-secondary/50 sm:p-6'
-          >
-            <img src={p.photo} alt={p.name} loading='lazy' className='aspect-square w-full rounded-2xl object-cover' />
-            <p className='mt-4 font-semibold leading-tight'>{p.name}</p>
-            <p className='mt-1 flex items-center justify-between text-sm text-ink/55'>
-              {p.role}
-              <BsLinkedin className='text-ink/30 transition group-hover:text-[#0a66c2]' aria-label='LinkedIn' />
-            </p>
-          </a>
+      <div className='grid grid-cols-2 gap-4 sm:gap-6'>
+        {people.map((p, i) => (
+          <Reveal key={p.name} delay={i * 0.1} className={i === 1 ? 'mt-12 sm:mt-20' : ''}>
+            <a href={p.linkedin} target='_blank' rel='noreferrer' className='group block'>
+              <img
+                src={p.photo}
+                alt={p.name}
+                loading='lazy'
+                className='aspect-[4/5] w-full rounded-2xl object-cover transition duration-500 group-hover:-translate-y-1'
+              />
+              <p className='mt-4 flex items-center justify-between gap-2 font-semibold leading-tight'>
+                {p.name}
+                <BsLinkedin className='shrink-0 text-ink/25 transition group-hover:text-[#0a66c2]' aria-label='LinkedIn' />
+              </p>
+              <p className='mt-1 text-sm text-ink/55'>{p.role}</p>
+            </a>
+          </Reveal>
         ))}
-      </Reveal>
+      </div>
     </Container>
   </section>
 )

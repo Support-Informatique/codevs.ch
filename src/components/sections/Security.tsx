@@ -22,7 +22,7 @@ const findings: Array<{ title: string, level: keyof typeof severity }> = [
 ]
 
 const ReportMock: React.FC = () => (
-  <div className='rounded-[1.75rem] bg-night p-6 text-white shadow-2xl shadow-ink/30 ring-1 ring-white/10 sm:p-8' aria-hidden='true'>
+  <div className='rounded-[1.75rem] bg-white/[0.04] p-6 text-white ring-1 ring-white/10 sm:p-8' aria-hidden='true'>
     <div className='flex items-center justify-between text-xs text-white/50'>
       <span className='font-mono'>rapport-pentest.pdf</span>
       <span className='rounded-full px-2.5 py-0.5 ring-1 ring-white/15'>Exemple</span>
@@ -51,29 +51,31 @@ const ReportMock: React.FC = () => (
 )
 
 const Security: React.FC = () => (
-  <section id='securite' className='bg-white py-24 sm:py-32'>
+  <section id='securite' className='relative isolate overflow-hidden bg-night py-24 text-white sm:py-32'>
+    <div className='absolute -right-40 top-1/3 -z-10 size-[520px] rounded-full bg-secondary/15 blur-3xl' />
     <Container className='grid items-center gap-14 lg:grid-cols-2'>
       <div>
         <SectionHeading
+          dark
           eyebrow='Cybersécurité'
           title='Tests d’intrusion et audits de sécurité'
           intro='On teste vos sites, applications et serveurs comme le ferait un attaquant, avec votre accord. Vous recevez un rapport avec ce qu’il faut corriger, et comme on est aussi développeurs, on peut vous aider à le faire.'
         />
         <Reveal>
-          <ul className='mt-10 divide-y divide-line border-y border-line'>
+          <ul className='mt-10 divide-y divide-white/10 border-y border-white/10'>
             {offers.map(o => (
               <li key={o.title} className='flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6'>
                 <span className='font-semibold'>{o.title}</span>
-                <span className='text-sm text-ink/60'>{o.text}</span>
+                <span className='text-sm text-white/55'>{o.text}</span>
               </li>
             ))}
           </ul>
           <div className='mt-8 flex flex-wrap items-center gap-x-6 gap-y-4'>
-            <Button href='#contact'>
+            <Button href='#contact' variant='light'>
               Demander un pentest <HiArrowRight />
             </Button>
-            <p className='text-sm text-ink/60'>
-              Certifiés <strong className='text-ink'>OSCP</strong> et <strong className='text-ink'>OSWA</strong> (OffSec)
+            <p className='text-sm text-white/55'>
+              Certifiés <strong className='text-white'>OSCP</strong> et <strong className='text-white'>OSWA</strong> (OffSec)
             </p>
           </div>
         </Reveal>

@@ -2,12 +2,8 @@
 import charmey from '@/assets/work/jeunesse-charmey.webp'
 import payerne from '@/assets/work/10km-payerne.webp'
 import coupeNoel from '@/assets/work/coupe-noel-esta.webp'
-import acritec from '@/assets/work/acritec.webp'
 import schweizer from '@/assets/work/schweizer-solaire.webp'
 import lavage from '@/assets/work/lavage-shop.webp'
-import logistock from '@/assets/work/logistock.webp'
-import sarigai from '@/assets/work/sarigai.webp'
-import capConfiance from '@/assets/work/cap-sur-la-confiance.webp'
 
 // client logos
 import logoLogistock from '@/assets/images/clients/logistock.png'
@@ -89,25 +85,21 @@ export const moreProjects = [
   {
     title: 'Acritec Sàrl',
     description: 'Site d’entreprise pour un spécialiste en électricité et contrôles OIBT.',
-    image: acritec,
     url: 'https://acritec.ch'
   },
   {
     title: 'Logistock',
     description: 'Plateforme d’achat et de revente de matériaux de chantier.',
-    image: logistock,
     url: 'https://app.logistock.ch'
   },
   {
     title: 'Sarigai',
     description: 'Site multilingue pour une association fribourgeoise.',
-    image: sarigai,
     url: 'https://sarigai.ch'
   },
   {
     title: 'Cap sur la confiance',
     description: 'Jeu mobile pour travailler sa confiance en soi.',
-    image: capConfiance,
     url: 'https://app.capsurlaconfiance.ch'
   }
 ]
