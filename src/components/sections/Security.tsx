@@ -7,52 +7,54 @@ const offers = [
   { title: 'Audit de sécurité', text: 'Un état des lieux clair et des priorités.' }
 ]
 
-const severity = {
-  Critique: 'bg-red-500/15 text-red-300 ring-red-400/30',
-  Élevée: 'bg-orange-500/15 text-orange-300 ring-orange-400/30',
-  Moyenne: 'bg-amber-500/15 text-amber-200 ring-amber-300/30',
-  Faible: 'bg-sky-500/15 text-sky-200 ring-sky-300/30'
-}
+// Illustration only: one page of an example pentest report
+const FindingMock: React.FC = () => (
+  <div className='relative' aria-hidden='true'>
+    <div className='absolute inset-0 translate-x-4 translate-y-4 rotate-2 rounded-lg bg-white/10 ring-1 ring-white/10' />
+    <div className='relative rounded-lg bg-white p-6 text-ink shadow-2xl shadow-black/50 sm:p-8'>
+      <div className='flex items-center justify-between border-b border-line pb-3 text-[11px] uppercase tracking-wider text-ink/45'>
+        <span>Rapport de test d’intrusion</span>
+        <span className='font-semibold text-red-600'>Confidentiel</span>
+      </div>
 
-const findings: Array<{ title: string, level: keyof typeof severity }> = [
-  { title: 'Injection SQL dans le formulaire de recherche', level: 'Critique' },
-  { title: 'Accès aux factures d’autres clients via l’URL', level: 'Élevée' },
-  { title: 'Extension WordPress vulnérable', level: 'Moyenne' },
-  { title: 'En-têtes de sécurité manquants', level: 'Faible' }
-]
-
-const ReportMock: React.FC = () => (
-  <div className='rounded-[1.75rem] bg-white/[0.04] p-6 text-white ring-1 ring-white/10 sm:p-8' aria-hidden='true'>
-    <div className='flex items-center justify-between text-xs text-white/50'>
-      <span className='font-mono'>rapport-pentest.pdf</span>
-      <span className='rounded-full px-2.5 py-0.5 ring-1 ring-white/15'>Exemple</span>
-    </div>
-    <p className='mt-6 font-display text-xl font-bold'>Synthèse</p>
-    <div className='mt-4 grid grid-cols-4 gap-2 text-center'>
-      {Object.entries(severity).map(([label, cls], i) => (
-        <div key={label} className={`rounded-xl px-1 py-3 ring-1 ${cls}`}>
-          <p className='font-display text-2xl font-bold'>{[1, 2, 4, 6][i]}</p>
-          <p className='text-[10px] uppercase tracking-wide opacity-80 sm:text-[11px]'>{label}</p>
+      <div className='mt-6 flex items-start justify-between gap-6'>
+        <div>
+          <p className='font-mono text-xs text-ink/40'>Vulnérabilité 3.1</p>
+          <p className='mt-1 font-display text-lg font-bold leading-snug sm:text-xl'>Injection SQL dans la recherche de produits</p>
         </div>
-      ))}
+        <div className='shrink-0 rounded-md bg-red-600 px-3 py-2 text-center text-white'>
+          <p className='font-mono text-xl font-bold leading-none'>9.8</p>
+          <p className='mt-1 text-[10px] uppercase tracking-wider'>Critique</p>
+        </div>
+      </div>
+
+      <dl className='mt-5 grid grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 text-xs sm:text-sm'>
+        <dt className='text-ink/45'>Composant</dt><dd className='font-mono'>/api/produits?q=</dd>
+        <dt className='text-ink/45'>Impact</dt><dd>Lecture de toute la base clients</dd>
+        <dt className='text-ink/45'>Statut</dt><dd className='font-medium text-emerald-700'>Corrigé et re-testé</dd>
+      </dl>
+
+      <p className='mt-6 text-[11px] font-semibold uppercase tracking-wider text-ink/45'>Preuve</p>
+      <pre className='mt-2 overflow-hidden rounded-md bg-night p-4 font-mono text-[10.5px] leading-relaxed text-white/75 sm:text-xs'>
+        GET /api/produits?q=<span className='bg-red-500/30 text-red-200'>chaise&apos;+OR+1=1--</span> HTTP/1.1{'\n'}
+        Host: boutique.exemple.ch{'\n\n'}
+        <span className='text-white'>HTTP/1.1 200 OK</span>{'\n'}
+        <span className='text-amber-200'>{'{'} &quot;resultats&quot;: 2418 {'}'}</span>
+      </pre>
+
+      <p className='mt-6 text-[11px] font-semibold uppercase tracking-wider text-ink/45'>Recommandation</p>
+      <p className='mt-2 text-sm leading-relaxed text-ink/70'>
+        Utiliser des requêtes préparées pour tous les paramètres transmis à la base de données.
+      </p>
+
+      <p className='mt-6 border-t border-line pt-3 text-right font-mono text-[11px] text-ink/35'>7 / 24</p>
     </div>
-    <ul className='mt-6 divide-y divide-white/10 text-sm'>
-      {findings.map(f => (
-        <li key={f.title} className='flex items-center justify-between gap-4 py-3.5'>
-          <span className='flex items-center gap-3'>
-            <span className={`shrink-0 rounded-md px-2 py-0.5 text-[10px] font-semibold uppercase ring-1 ${severity[f.level]}`}>{f.level}</span>
-            <span className='text-white/85'>{f.title}</span>
-          </span>
-          <span className='hidden shrink-0 text-xs text-emerald-300 sm:inline'>✓ corrigé</span>
-        </li>
-      ))}
-    </ul>
   </div>
 )
 
 const Security: React.FC = () => (
   <section id='securite' className='relative isolate overflow-hidden bg-night py-24 text-white sm:py-32'>
-    <div className='absolute -right-40 top-1/3 -z-10 size-[520px] rounded-full bg-secondary/15 blur-3xl' />
+    <div className='absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_at_70%_50%,black,transparent_75%)] bg-[size:48px_48px]' />
     <Container className='grid items-center gap-14 lg:grid-cols-2'>
       <div>
         <SectionHeading
@@ -81,7 +83,7 @@ const Security: React.FC = () => (
         </Reveal>
       </div>
       <Reveal delay={0.1}>
-        <ReportMock />
+        <FindingMock />
       </Reveal>
     </Container>
   </section>
