@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
-import { HiCheck, HiPlus } from 'react-icons/hi2'
+import { HiCheck } from 'react-icons/hi2'
 import charmey from '@/assets/work/jeunesse-charmey.webp'
 import payerne from '@/assets/work/10km-payerne.webp'
 import schweizer from '@/assets/work/schweizer-solaire.webp'
@@ -162,17 +162,10 @@ const Services: React.FC = () => {
                       type='button'
                       onClick={() => { setActive(i); setAuto(false) }}
                       aria-expanded={open}
-                      className={`group flex w-full items-baseline gap-4 py-3 text-left font-display text-2xl font-bold transition-colors sm:text-3xl ${open ? 'text-ink' : 'text-ink/35 hover:text-ink/70'}`}
+                      className={`flex w-full items-baseline gap-4 py-3 text-left font-display text-2xl font-bold transition-colors sm:text-3xl ${open ? 'text-ink' : 'text-ink/35 hover:text-ink/70'}`}
                     >
                       <span className='font-display text-sm text-secondary'>0{i + 1}</span>
                       {s.title}
-                      <span
-                        className={`ml-auto flex size-8 shrink-0 items-center justify-center self-center rounded-full text-base ring-1 transition ${
-                          open ? 'rotate-45 text-primary ring-primary/30' : 'text-ink/40 ring-ink/15 group-hover:text-primary'
-                        }`}
-                      >
-                        <HiPlus />
-                      </span>
                     </button>
                     <AnimatePresence initial={false}>
                       {open && (
