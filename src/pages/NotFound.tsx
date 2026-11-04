@@ -1,25 +1,12 @@
-// components
-import Button from '@/components/utils/Button'
+import { Button } from '@/components/ui'
 
-const NotFound: React.FC = () => {
-  document.body.style.backgroundColor = 'var(--background)'
-
-  const goBackHome = () => {
-    window.location.href = '/'
-  }
-
-  return (
-    <div className='flex flex-col justify-center items-center h-screen'>
-      <h1 className='text-4xl font-bold'>404</h1>
-      <h2 className='text-2xl font-bold mb-5'>How did you end up here?</h2>
-      <Button
-        size='sm'
-        type='outlined'
-        text='Go back home'
-        onClick={goBackHome}
-      />
-    </div>
-  )
-}
+const NotFound: React.FC = () => (
+  <main className='flex min-h-svh flex-col items-center justify-center px-5 text-center'>
+    <p className='font-display text-7xl font-extrabold text-primary'>404</p>
+    <h1 className='mt-4 text-2xl font-bold'>Cette page s’est perdue en montagne.</h1>
+    <p className='mt-2 text-ink/60'>Elle n’existe pas, ou plus.</p>
+    <Button href='/' className='mt-8'>Retour à l’accueil</Button>
+  </main>
+)
 
 export default NotFound

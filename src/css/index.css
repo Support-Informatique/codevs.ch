@@ -1,55 +1,50 @@
-/* To remove the VSCode unknown warning */
-/* https://www.codeconcisely.com/posts/tailwind-css-unknown-at-rules/ */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700;800&display=swap');
 @import 'tailwindcss';
 @config '../../tailwind.config.cjs';
-@source inline('bg-line-mountains-peak bg-line-mountains-horizon');
 
 :root {
-  font-family: Montserrat, Inter, Avenir, Helvetica, Arial, sans-serif;
+  --background: #f4f7f9;
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-  box-sizing: border-box;
-
-  --background: #f2f4f6;
-  --top-mountains-color: #b8e9ee;
 }
 
-@keyframes change-bg {
-  from {
-    background: #fff;
-  }
-  to {
-    background: var(--top-mountains-color);
-  }
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-background;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-secondary/60 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-secondary/80;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
-  /* This is changed to auto by the loading screen */
-  overflow: hidden;
-  animation-fill-mode: forwards;
+  @apply bg-background text-ink font-sans;
 }
 
-#root {
-  @apply bg-background;
+h1,
+h2,
+h3 {
+  @apply font-display tracking-tight text-balance;
+}
+
+::selection {
+  @apply bg-secondary/25;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee {
+    animation: none;
+  }
 }
