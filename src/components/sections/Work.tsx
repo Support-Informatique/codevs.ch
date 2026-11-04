@@ -1,7 +1,8 @@
+import { HiArrowRight } from 'react-icons/hi'
 import { HiArrowUpRight, HiCheck } from 'react-icons/hi2'
 import fermeSelf from '@/assets/work/ferme-self.webp'
 import fermeLogo from '@/assets/work/ferme-logo.webp'
-import { moreProjects, projects, type Project } from '@/data/data'
+import { clientLogos, moreProjects, projects, type Project } from '@/data/data'
 import { BrowserFrame, Container, Reveal, SectionHeading } from '@/components/ui'
 
 const fermePoints = [
@@ -43,13 +44,17 @@ const ProjectItem: React.FC<{ p: Project }> = ({ p }) => (
   </Reveal>
 )
 
+// Clients that don't already appear above
+const featured = ['Acritec', 'Coupe de Noël Estavayer', 'Logistock', 'Sarigai', 'Lavage du Colisée', 'Cap sur la confiance']
+const otherLogos = clientLogos.filter(l => !featured.includes(l.name)).slice(0, 7)
+
 const Work: React.FC = () => (
   <section id='realisations' className='py-24 sm:py-32'>
     <Container>
       <SectionHeading
         eyebrow='Réalisations'
         title='Quelques réalisations'
-        intro='Des sites et des outils réalisés pour des clients de la région.'
+        intro='Quelques-uns des sites et des outils réalisés pour nos clients de la région.'
       />
 
       <Reveal className='mt-14'>
@@ -113,6 +118,22 @@ const Work: React.FC = () => (
             </li>
           ))}
         </ul>
+      </Reveal>
+
+      <Reveal className='mt-14 flex flex-col gap-5 border-t border-ink/10 pt-10 sm:flex-row sm:items-center sm:gap-6'>
+        <div className='flex shrink-0 -space-x-3' aria-hidden='true'>
+          {otherLogos.map(l => (
+            <span key={l.name} className='flex size-14 items-center justify-center rounded-full bg-white p-1.5 ring-4 ring-background'>
+              <img src={l.src} alt='' loading='lazy' className='max-h-full max-w-full object-contain' />
+            </span>
+          ))}
+        </div>
+        <p className='text-lg text-ink/70'>
+          <strong className='font-semibold text-ink'>Et bien d’autres projets</strong>, pour plus de 20&nbsp;clients en Suisse romande.{' '}
+          <a href='#contact' className='inline-flex items-center gap-1 font-semibold text-primary hover:underline'>
+            Demandez-nous des exemples <HiArrowRight />
+          </a>
+        </p>
       </Reveal>
     </Container>
   </section>
