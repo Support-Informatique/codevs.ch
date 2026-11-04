@@ -75,7 +75,7 @@ const HostingVisual: React.FC = () => (
       </span>
     </p>
     {hosted.map((h, i) => (
-      <div key={h} className={i >= 4 ? 'max-sm:hidden' : ''}>
+      <div key={h} className={i >= 4 ? 'max-lg:hidden' : ''}>
         <p className='flex justify-between text-xs text-ink/60'>
           <span>{h}</span><span>99.98%</span>
         </p>
