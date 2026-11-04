@@ -12,7 +12,7 @@ const rise = (delay: number) => ({
 })
 
 const facts = [
-  { value: '20+', label: 'clients en Suisse romande' },
+  { value: '50+', label: 'clients en Suisse romande' },
   { value: 'CHF 800’000+', label: 'encaissés avec Pay Event' },
   { value: 'OSCP · OSWA', label: 'certifiés en sécurité offensive' },
   { value: 'Depuis Fribourg', label: 'pour toute la Romandie' }

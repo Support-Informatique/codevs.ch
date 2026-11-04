@@ -129,7 +129,7 @@ const Work: React.FC = () => (
           ))}
         </div>
         <p className='text-lg text-ink/70'>
-          <strong className='font-semibold text-ink'>Et bien d’autres projets</strong>, pour plus de 20&nbsp;clients en Suisse romande.{' '}
+          <strong className='font-semibold text-ink'>Et bien d’autres projets</strong>, pour plus de 50&nbsp;clients en Suisse romande.{' '}
           <a href='#contact' className='inline-flex items-center gap-1 font-semibold text-primary hover:underline'>
             Demandez-nous des exemples <HiArrowRight />
           </a>
