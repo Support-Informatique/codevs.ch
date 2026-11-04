@@ -78,6 +78,13 @@ const Products: React.FC = () => (
                   </li>
                 ))}
               </ol>
+              <p className='mt-6 text-sm text-white/55'>
+                Partenaire d’intégration officiel de{' '}
+                <a href='https://www.raisenow.com/fr-ch/entreprise/partenaires' target='_blank' rel='noreferrer' className='font-semibold text-white underline decoration-[#b6f36a]/50 underline-offset-4 hover:decoration-[#b6f36a]'>
+                  RaiseNow
+                </a>{' '}
+                pour les dons en ligne.
+              </p>
               <div className='mt-10 flex flex-wrap items-center gap-x-10 gap-y-5 border-t border-white/10 pt-8'>
                 <div>
                   <p className='font-display text-3xl font-bold text-[#b6f36a]'>CHF 800’000+</p>

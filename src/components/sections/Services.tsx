@@ -2,9 +2,9 @@ import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
 import { HiCheck } from 'react-icons/hi2'
-import charmey from '@/assets/work/jeunesse-charmey.webp'
-import payerne from '@/assets/work/10km-payerne.webp'
-import schweizer from '@/assets/work/schweizer-solaire.webp'
+import charmey from '@/assets/work/jeunesse-charmey-sm.webp'
+import payerne from '@/assets/work/10km-payerne-sm.webp'
+import schweizer from '@/assets/work/schweizer-solaire-sm.webp'
 import lavage from '@/assets/work/lavage-shop.webp'
 import { Container, Reveal, SectionHeading } from '@/components/ui'
 
@@ -15,14 +15,14 @@ const SitesVisual: React.FC = () => (
       { src: payerne, cls: 'top-[18%] right-0 w-[62%] rotate-2' },
       { src: charmey, cls: 'bottom-[4%] left-[16%] w-[66%]' }
     ].map(s => (
-      <img key={s.src} src={s.src} alt='' className={`absolute aspect-[16/10] rounded-xl object-cover object-top shadow-2xl shadow-ink/25 ring-1 ring-ink/10 ${s.cls}`} />
+      <img key={s.src} src={s.src} alt='' loading='lazy' decoding='async' className={`absolute aspect-[16/10] rounded-xl object-cover object-top shadow-2xl shadow-ink/25 ring-1 ring-ink/10 ${s.cls}`} />
     ))}
   </div>
 )
 
 const AppsVisual: React.FC = () => (
   <div className='relative h-full'>
-    <img src={lavage} alt='' className='size-full rounded-2xl object-cover' />
+    <img src={lavage} alt='' loading='lazy' decoding='async' className='size-full rounded-2xl object-cover' />
     <div className='absolute right-5 bottom-5 w-56 rounded-2xl bg-white p-4 shadow-xl shadow-ink/20'>
       <p className='text-xs text-ink/55'>Machine 3 · Lavage 60°</p>
       <p className='mt-1 font-display text-2xl font-bold text-ink'>CHF 6.00</p>
@@ -42,7 +42,7 @@ const terminal = [
   { t: '  ✓ authentification', c: 'text-emerald-300' },
   { t: '  ✓ paiements', c: 'text-emerald-300' },
   { t: '$ rapport --envoyer', c: 'text-white/90' },
-  { t: '  rapport-pentest.pdf envoyé, correctifs proposés', c: 'text-sky' }
+  { t: '  rapport envoyé, correctifs proposés', c: 'text-sky' }
 ]
 
 const SecurityVisual: React.FC = () => (
@@ -53,7 +53,7 @@ const SecurityVisual: React.FC = () => (
       <span className='size-2.5 rounded-full bg-white/15' />
     </div>
     {terminal.map((l, i) => (
-      <motion.p key={l.t} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 + i * 0.12 }} className={`whitespace-pre ${l.c}`}>
+      <motion.p key={l.t} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 + i * 0.12 }} className={`overflow-hidden text-ellipsis whitespace-pre ${l.c}`}>
         {l.t}
       </motion.p>
     ))}
@@ -74,8 +74,8 @@ const HostingVisual: React.FC = () => (
         <span className='size-2 rounded-full bg-emerald-500' /> Tout est en ligne
       </span>
     </p>
-    {hosted.map(h => (
-      <div key={h}>
+    {hosted.map((h, i) => (
+      <div key={h} className={i >= 4 ? 'max-sm:hidden' : ''}>
         <p className='flex justify-between text-xs text-ink/60'>
           <span>{h}</span><span>99.98%</span>
         </p>
@@ -98,7 +98,7 @@ const services = [
   {
     title: 'Applications & systèmes de vente',
     text: 'Caisses, bornes, paiements ou outils internes, développés selon votre façon de travailler.',
-    tags: ['Caisses & kiosques', 'TWINT & terminaux', 'E-commerce', 'Outils internes'],
+    tags: ['Caisses & kiosques', 'TWINT & terminaux', 'Dons en ligne avec RaiseNow', 'E-commerce', 'Outils internes'],
     Visual: AppsVisual
   },
   {
@@ -126,6 +126,15 @@ const Services: React.FC = () => {
   const inView = useInView(listRef, { amount: 0.5 })
   const Visual = services[active].Visual
 
+  const select = (i: number, button: HTMLElement) => {
+    setActive(i)
+    setAuto(false)
+    // Mobile: the item above collapses, so bring the tapped one back under the nav once it settles
+    if (!window.matchMedia('(min-width: 1024px)').matches) {
+      setTimeout(() => { button.scrollIntoView({ behavior: 'smooth', block: 'start' }) }, 380)
+    }
+  }
+
   // Desktop only: cycle through the services until the visitor picks one
   const cycling = auto && inView && window.matchMedia('(min-width: 1024px)').matches
   useEffect(() => {
@@ -143,7 +152,7 @@ const Services: React.FC = () => {
         />
 
         <div className='mt-14 grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16'>
-          <Reveal>
+          <Reveal className='min-w-0'>
             <ul ref={listRef} className='space-y-2'>
               {services.map((s, i) => {
                 const open = i === active
@@ -160,7 +169,7 @@ const Services: React.FC = () => {
                     )}
                     <button
                       type='button'
-                      onClick={() => { setActive(i); setAuto(false) }}
+                      onClick={e => { select(i, e.currentTarget) }}
                       aria-expanded={open}
                       className={`flex w-full items-baseline gap-4 py-3 text-left font-display text-2xl font-bold transition-colors sm:text-3xl ${open ? 'text-ink' : 'text-ink/35 hover:text-ink/70'}`}
                     >
