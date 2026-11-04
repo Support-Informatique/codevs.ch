@@ -10,13 +10,13 @@ const people = [
 
 const Team: React.FC = () => (
   <section id='equipe' className='bg-white py-24 sm:py-32'>
-    <Container className='grid gap-14 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-20'>
+    <Container className='grid gap-14 md:grid-cols-[1fr_auto] md:items-center md:gap-12 lg:gap-20'>
       <SectionHeading
         eyebrow='Qui sommes-nous'
         title='Nous, c’est Elwan et Lionel.'
         intro='Deux ingénieurs qui ont fondé CODEVS Sàrl à Fribourg. Nous nous occupons nous-mêmes de chaque projet, du premier rendez-vous à la mise en ligne.'
       />
-      <div className='grid w-full max-w-[18rem] grid-cols-2 gap-4 sm:max-w-sm sm:gap-6 lg:w-96'>
+      <div className='grid w-full max-w-[18rem] grid-cols-2 gap-4 sm:max-w-sm sm:gap-6 md:w-72 lg:w-96'>
         {people.map((p, i) => (
           <Reveal key={p.name} delay={i * 0.1} className={i === 1 ? 'mt-8' : ''}>
             <a href={p.linkedin} target='_blank' rel='noreferrer' className='group block'>
