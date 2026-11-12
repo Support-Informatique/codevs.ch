@@ -4,10 +4,16 @@
  * one HTML entity per character.
  */
 
-const decode = (codes: number[]) => String.fromCharCode(...codes.map(c => c - 7))
+const decode = (codes: number[]) =>
+  String.fromCharCode(...codes.map(c => c - 7))
 
-const email = () => decode([106, 118, 117, 123, 104, 106, 123, 71, 106, 118, 107, 108, 125, 122, 53, 106, 111])
-const phone = () => decode([50, 59, 56, 39, 62, 64, 39, 56, 64, 64, 39, 61, 62, 39, 55, 63])
+const email = () =>
+  decode([
+    106, 118, 117, 123, 104, 106, 123, 71, 106, 118, 107, 108, 125, 122, 53,
+    106, 111
+  ])
+const phone = () =>
+  decode([50, 59, 56, 39, 62, 64, 39, 56, 64, 64, 39, 61, 62, 39, 55, 63])
 
 const toEntities = (text: string) =>
   text

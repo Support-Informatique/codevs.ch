@@ -1,0 +1,95 @@
+/*
+ * Hero: only what the scroll morph and the intro timeline need. Everything static is in the JSX.
+ * These rules are unlayered, so they win over the utilities on the same elements: that is how
+ * the intro holds things back and then lets them go.
+ */
+
+/* ---------- morph: the coloured drawing fills in from its base as the card forms ---------- */
+/* --p (0 → 1) is set on the section by useHeroMorph */
+[data-art] {
+  --fill: calc(var(--p, 0) * 118%);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    #000 calc(var(--fill) - 18%),
+    transparent var(--fill)
+  );
+  mask-image: linear-gradient(
+    to top,
+    #000 calc(var(--fill) - 18%),
+    transparent var(--fill)
+  );
+}
+.no-morph [data-art] {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* ---------- intro (useIntroPen; html.intro is set in index.html unless reduced motion) ----------
+   One curve and one direction for everything: it rises into place. Small parts take 420 ms,
+   text lines 700 ms. `--d` on an element is its delay. */
+.intro {
+  --e: var(--ease-quart);
+  --t-sm: 0.42s;
+  --t-md: 0.7s;
+}
+
+/* title lines rise out of their own mask; then the sentence and the two actions */
+.intro [data-intro='line'] {
+  transform: translateY(140%);
+}
+.intro [data-intro='rise'],
+.intro [data-intro='act'] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.intro-go [data-intro] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--t-sm) var(--e),
+    transform var(--t-md) var(--e);
+  transition-delay: var(--d, 0s);
+}
+/* afterwards the actions get their hover transitions back, without the intro's delay */
+.intro-end [data-intro='act'] {
+  transition-delay: 0s;
+  transition-property: background, color, box-shadow, scale;
+  transition-duration: 0.2s;
+  transition-timing-function: ease, ease, ease, cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+/* the drawing: strokes hidden until the pen draws them, then the tint fades in */
+.intro [data-line] {
+  stroke-dashoffset: 1;
+}
+.intro [data-tint] {
+  opacity: 0;
+  transition: opacity 0.6s var(--e);
+}
+.intro .tint-on [data-tint],
+.intro-end [data-tint] {
+  opacity: 1;
+}
+
+/* summit labels: the leader line grows up from the summit and the label rises with it */
+.intro [data-tag] {
+  opacity: 0;
+  translate: 0 8px;
+  transition:
+    opacity var(--t-sm) var(--e),
+    translate var(--t-sm) var(--e);
+}
+.intro [data-tag]::after {
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  transition: transform var(--t-sm) var(--e);
+}
+.intro [data-tag].is-on,
+.intro-end [data-tag] {
+  opacity: 1;
+  translate: 0 0;
+}
+.intro [data-tag].is-on::after,
+.intro-end [data-tag]::after {
+  transform: none;
+}

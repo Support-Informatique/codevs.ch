@@ -1,32 +1,35 @@
-import { MotionConfig } from 'framer-motion'
-import Nav from '@/components/sections/Nav'
-import Hero from '@/components/sections/Hero'
-import Clients from '@/components/sections/Clients'
-import Services from '@/components/sections/Services'
-import Work from '@/components/sections/Work'
-import Products from '@/components/sections/Products'
-import Security from '@/components/sections/Security'
-import Team from '@/components/sections/Team'
-import Process from '@/components/sections/Process'
-import Contact from '@/components/sections/Contact'
-import Footer from '@/components/sections/Footer'
+import Contact from '@/components/home/Contact/Contact'
+import Footer from '@/components/home/Footer/Footer'
+import Hero from '@/components/home/Hero/Hero'
+import Logos from '@/components/home/Logos/Logos'
+import Nav from '@/components/home/Nav/Nav'
+import Process from '@/components/home/Process/Process'
+import Products from '@/components/home/Products/Products'
+import Security from '@/components/home/Security/Security'
+import Services from '@/components/home/Services/Services'
+import Team from '@/components/home/Team/Team'
+import Work from '@/components/home/Work/Work'
+import { useRevealOnScroll } from '@/hooks/useRevealOnScroll'
 
-const Home: React.FC = () => (
-  <MotionConfig reducedMotion='user'>
-    <Nav />
-    <main>
-      <Hero />
-      <Clients />
-      <Services />
-      <Team />
-      <Work />
-      <Security />
-      <Products />
-      <Process />
-      <Contact />
-    </main>
-    <Footer />
-  </MotionConfig>
-)
+const Home = () => {
+  useRevealOnScroll()
+  return (
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Logos />
+        <Services />
+        <Work />
+        <Security />
+        <Products />
+        <Process />
+        <Team />
+        <Contact />
+      </main>
+      <Footer />
+    </>
+  )
+}
 
 export default Home

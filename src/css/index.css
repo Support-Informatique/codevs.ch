@@ -1,50 +1,176 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700;800&display=swap');
 @import 'tailwindcss';
-@config '../../tailwind.config.cjs';
 
-:root {
-  --background: #f4f7f9;
-  color-scheme: light;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/*
+ * The design tokens of the site, as Tailwind theme values: each one becomes utilities
+ * (`text-primary`, `border-line`, `rounded-card`, `ease-brand`, `max-w-page`, …).
+ * Colours come from the CODEVS mountain logo.
+ */
+@theme {
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
+  --color-ink: #0a3044;
+  --color-primary: #0f7aa8;
+  --color-primary-hover: #0b6790;
+  --color-fg: #0b1f2a;
+  --color-muted: #4f6875;
+  --color-muted-2: #9db3bd;
+  --color-line: #e2edf1;
+  --color-line-2: #d0e1e8;
+  --color-surface: #f5fbfd;
+  --color-tint: #f3f9fb;
+  --color-sky: #b8e9ee;
+  --color-night: #041821;
+  --color-cyan-50: #eef9fc;
+  --color-cyan-100: #d3eff6;
+  --color-cyan-300: #84d2e5;
+  --color-cyan-500: #2fa8cb;
+  --color-cyan-600: #1f91b6;
+  --color-cyan-700: #1a7499;
 
-body {
-  @apply bg-background text-ink font-sans;
-}
+  --radius-card: 16px;
+  --radius-card-sm: 10px;
+  --radius-card-xs: 6px;
 
-h1,
-h2,
-h3 {
-  @apply font-display tracking-tight text-balance;
-}
+  --container-page: 1200px;
 
-::selection {
-  @apply bg-secondary/25;
-}
+  /* the page's one easing, and the intro's quart ease-out */
+  --ease-brand: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
 
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
+  /* the client logos strip */
+  --animate-marquee: marquee 60s linear infinite;
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* a text caret */
+  --animate-blink: blink 1s steps(1) infinite;
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* a refused request (security) and a found flaw (services): a short, damped shake */
+  --animate-shake: shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translateX(-1px);
+    }
+    20%,
+    80% {
+      transform: translateX(2px);
+    }
+    30%,
+    50%,
+    70% {
+      transform: translateX(-3px);
+    }
+    40%,
+    60% {
+      transform: translateX(3px);
+    }
+  }
+  --animate-jolt: jolt 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  @keyframes jolt {
+    20% {
+      transform: translateX(-3px);
+    }
+    40% {
+      transform: translateX(3px);
+    }
+    60% {
+      transform: translateX(-2px);
+    }
+    80% {
+      transform: translateX(1px);
+    }
+  }
+
+  /* a ring spreading out from a click, or around a flaw */
+  --animate-ripple: ripple 0.55s var(--ease-brand);
+  --animate-ripple-loop: ripple 1.1s var(--ease-brand) infinite;
+  @keyframes ripple {
+    from {
+      opacity: 0.75;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.9);
+    }
+  }
+
+  /* a finger touching the till */
+  --animate-touch: touch 0.5s var(--ease-brand);
+  @keyframes touch {
+    from {
+      opacity: 1;
+      transform: scale(0.4);
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.6);
+    }
+  }
+
+  /* the scan line moving down the QR code */
+  --animate-scan: scan 1s var(--ease-brand) forwards;
+  @keyframes scan {
+    0% {
+      top: 6px;
+      opacity: 0;
+    }
+    15%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      top: calc(100% - 8px);
+      opacity: 0;
+    }
+  }
+
+  /* a service's description opening */
+  --animate-unfold: unfold 0.4s var(--ease-brand);
+  @keyframes unfold {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 
-.marquee {
-  animation: marquee 40s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
+@layer base {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
   }
-  .marquee {
-    animation: none;
+  body {
+    @apply overflow-x-hidden bg-white font-sans text-base/[1.55] text-fg antialiased;
+  }
+  ::selection {
+    @apply bg-cyan-100 text-ink;
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    ::before,
+    ::after {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 }
