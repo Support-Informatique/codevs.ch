@@ -18,7 +18,7 @@ const Mark = () => (
     </defs>
     {/* the ridge behind, on the right */}
     <path d='M21 13.5L31 28H17Z' fill='#b8e4f0' />
-    <path d='M13.5 4L1 28H13Z' fill='url(#brand-lit)' />
+    <path d='M13.5 4L1 28H13L13.6 16Z' fill='url(#brand-lit)' />
     <path d='M13.5 4L26 28H13L13.6 16Z' fill='url(#brand-shade)' />
     <path
       d='M13.5 4L10.4 10.2L12.3 9.4L13.4 11L14.9 9.3L16.6 10.3Z'
