@@ -1,5 +1,13 @@
 import Reveal from '@/components/home/shared/Reveal'
-import { button, container, cx, h2, section } from '@/components/home/shared/ui'
+import { ArrowRight } from '@/components/home/shared/Icons'
+import {
+  button,
+  container,
+  cx,
+  h2,
+  ico,
+  section
+} from '@/components/home/shared/ui'
 import Breach from './Breach'
 import { CERTIFICATIONS, SERVICES } from './data'
 
@@ -15,7 +23,7 @@ const title = 'leading-tight font-semibold tracking-[-.02em] text-fg'
 const Security = () => (
   <section
     id='securite'
-    className={cx(section, 'relative isolate overflow-hidden bg-white')}
+    className={cx(section, 'relative isolate overflow-hidden bg-tint')}
   >
     <div className={container}>
       <div className='mb-9 flex flex-col items-start'>
@@ -32,7 +40,11 @@ const Security = () => (
           <br />
           <span className='text-primary'>et audits de sécurité.</span>
         </Reveal>
-        <Reveal delay='.1s' className='mt-5 max-w-140'>
+        {/* the paragraph, with the action in the whitespace on its right (under it on phones) */}
+        <Reveal
+          delay='.1s'
+          className='mt-5 flex w-full items-end justify-between gap-x-10 gap-y-6 max-[760px]:flex-col max-[760px]:items-start'
+        >
           <p
             className={cx(
               paragraph,
@@ -46,8 +58,8 @@ const Security = () => (
             avec votre accord. Vous recevez un rapport clair, et comme nous
             sommes aussi développeurs, nous pouvons vous aider à corriger.
           </p>
-          <a href='#contact' className={button()}>
-            Demander un pentest
+          <a href='#contact' className={cx(button('lg'), 'flex-none')}>
+            Demander un pentest <ArrowRight className={ico} />
           </a>
         </Reveal>
       </div>

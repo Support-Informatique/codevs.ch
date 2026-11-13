@@ -9,8 +9,6 @@ interface Props {
   tagline: string
   title: ReactNode
   steps: string[]
-  /** Index of the lit step, or -1 for none. */
-  activeStep: number
   partner: ReactNode
   figure: string
   figureLabel: string
@@ -26,7 +24,6 @@ const ProductCard = ({
   tagline,
   title,
   steps,
-  activeStep,
   partner,
   figure,
   figureLabel,
@@ -49,28 +46,17 @@ const ProductCard = ({
         {title}
       </h3>
       <ol>
-        {steps.map((step, i) => {
-          const on = i === activeStep
-          return (
-            <li
-              key={step}
-              className='flex items-center gap-4 py-2.25 text-[17px] text-(--soft) max-[600px]:text-[15.5px]'
-            >
-              <span
-                className={cx(
-                  'grid size-8.5 flex-none place-items-center rounded-full font-mono text-[13px] font-semibold shadow-[inset_0_0_0_1px_var(--chip-edge)]',
-                  '[transition:background_.3s,scale_.3s_var(--ease-brand)]',
-                  on
-                    ? 'scale-[1.06] bg-(--accent) text-(--accent-ink)'
-                    : 'bg-(--chip) text-(--step-ink)'
-                )}
-              >
-                {i + 1}
-              </span>
-              {step}
-            </li>
-          )
-        })}
+        {steps.map((step, i) => (
+          <li
+            key={step}
+            className='flex items-center gap-4 py-2.25 text-[17px] text-(--soft) max-[600px]:text-[15.5px]'
+          >
+            <span className='grid size-8.5 flex-none place-items-center rounded-full bg-(--chip) font-mono text-[13px] font-semibold text-(--step-ink) shadow-[inset_0_0_0_1px_var(--chip-edge)]'>
+              {i + 1}
+            </span>
+            {step}
+          </li>
+        ))}
       </ol>
       <p className='mt-5.5 text-[15px] text-(--muted-c) [&_b]:font-semibold [&_b]:text-(--fg) [&_b]:underline [&_b]:decoration-(--accent) [&_b]:decoration-[1.5px] [&_b]:underline-offset-4'>
         {partner}

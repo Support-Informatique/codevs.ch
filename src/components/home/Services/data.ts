@@ -54,8 +54,8 @@ export const SERVICES: readonly Service[] = [
       'Vos sites hébergés en Suisse, mis à jour et surveillés en permanence.',
     more: '#produits',
     caption: {
-      name: 'Infomaniak',
-      text: 'hébergement en Suisse, surveillé en permanence'
+      name: 'Wigud',
+      text: 'notre outil surveille vos sites jour et nuit'
     },
     Scene: HostScene
   }

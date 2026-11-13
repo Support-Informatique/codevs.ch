@@ -8,13 +8,16 @@ const PEOPLE = [
   { name: 'Lionel Ding', role: 'Ingénieur, co-fondateur', photo: lionel }
 ]
 
-/** The two founders, next to a short introduction. */
+/**
+ * The two founders, next to a short introduction: early enough in the page that visitors know
+ * who they will work with, with photos kept small.
+ */
 const Team = () => (
-  <section className={cx(section, 'bg-tint')} id='equipe'>
+  <section className={cx(section, 'bg-white')} id='equipe'>
     <div
       className={cx(
         container,
-        'grid grid-cols-[1fr_1.1fr] items-center gap-14 max-[1000px]:grid-cols-1'
+        'grid grid-cols-[minmax(0,1fr)_minmax(0,380px)] items-center gap-14 max-[860px]:grid-cols-1'
       )}
     >
       <div>
@@ -30,7 +33,7 @@ const Team = () => (
           rendez-vous à la mise en ligne.
         </Reveal>
       </div>
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid w-full max-w-95 grid-cols-2 gap-4'>
         {PEOPLE.map(({ name, role, photo }, i) => (
           <Reveal
             as='figure'
@@ -38,7 +41,7 @@ const Team = () => (
             delay={i ? '.1s' : undefined}
             className={cx(
               'group overflow-hidden rounded-card border border-line bg-white',
-              i > 0 && 'mt-12 max-[600px]:mt-6'
+              i > 0 && 'mt-8 max-[600px]:mt-6'
             )}
           >
             <div className='aspect-4/5 overflow-hidden bg-linear-to-b from-cyan-100 to-cyan-50'>
@@ -49,9 +52,11 @@ const Team = () => (
                 className='size-full object-cover transition-transform duration-1000 ease-brand group-hover:scale-[1.04]'
               />
             </div>
-            <figcaption className='border-t border-line px-4 pt-3.5 pb-4'>
-              <b className='block font-medium tracking-[-.01em]'>{name}</b>
-              <span className='text-[13.5px] text-muted'>{role}</span>
+            <figcaption className='border-t border-line px-3.5 pt-3 pb-3.5'>
+              <b className='block text-[14.5px] font-medium tracking-[-.01em]'>
+                {name}
+              </b>
+              <span className='text-[13px] text-muted'>{role}</span>
             </figcaption>
           </Reveal>
         ))}

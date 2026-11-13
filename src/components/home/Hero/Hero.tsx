@@ -27,24 +27,35 @@ const FACES = [
 /** Without the intro, the labels fade in one after another once placed. */
 const TAG_FADE_DELAYS = ['', 'delay-900', 'delay-1100', 'delay-1300', '']
 
-/** A summit label; script sets `left`, `top` and `--lift` (the leader line's height). */
+/**
+ * A summit label: the real summit's name over the skill chip. Script sets `left`, `top` and
+ * `--lift` (the leader line's height, from the summit up to the chip).
+ */
 const tagClass = ({ main }: Peak, i: number) =>
   cx(
-    'pointer-events-none absolute z-2 inline-flex items-center gap-1.75 rounded-full border border-[rgba(208,225,232,.9)] bg-[rgba(255,255,255,.9)] font-mono tracking-[.02em] whitespace-nowrap',
+    'pointer-events-none absolute z-2 flex flex-col items-center gap-1 whitespace-nowrap',
     // `transform`, not `translate`: the intro rises the labels with `translate`
     '[transform:translate(-50%,calc(-100%-var(--lift,22px)))]',
     'opacity-0 transition-opacity duration-800 ease-[ease] in-[.is-ready]:opacity-100',
     TAG_FADE_DELAYS[i],
     'after:absolute after:top-full after:left-1/2 after:h-[calc(var(--lift,22px)-3px)] after:w-px',
     main
-      ? 'py-1.25 pr-2.75 pl-2.25 text-[11.5px] text-ink after:bg-[linear-gradient(var(--color-ink),transparent)]'
-      : 'px-2.25 py-1 text-[10.5px] text-cyan-700 after:bg-[linear-gradient(var(--color-cyan-600),transparent)] max-[600px]:hidden'
+      ? 'after:bg-[linear-gradient(var(--color-ink),transparent)]'
+      : 'after:bg-[linear-gradient(var(--color-cyan-600),transparent)] max-[600px]:hidden'
+  )
+
+const chipClass = ({ main }: Peak) =>
+  cx(
+    'inline-flex items-center gap-1.75 rounded-full border border-[rgba(208,225,232,.9)] bg-[rgba(255,255,255,.9)] font-mono tracking-[.02em]',
+    main
+      ? 'py-1.25 pr-2.75 pl-2.25 text-[11.5px] text-ink'
+      : 'px-2.25 py-1 text-[10.5px] text-cyan-700'
   )
 
 /** Grid of four, two per row below 1000px (then the third cell starts a row). */
 const kpiClass = (i: number) =>
   cx(
-    'border-line px-5.5 pt-[clamp(14px,2.4vh,26px)] pb-[clamp(14px,2.2vh,24px)] max-[600px]:px-4 max-[600px]:pt-5 max-[600px]:pb-5',
+    'border-line px-5.5 pt-[clamp(14px,2.4vh,26px)] text-center pb-[clamp(14px,2.2vh,24px)] max-[600px]:px-4 max-[600px]:pt-5 max-[600px]:pb-5',
     i > 0 && 'border-l',
     i === 2 && 'max-[1000px]:border-l-0',
     i < 2 && 'max-[1000px]:border-b'
@@ -101,16 +112,16 @@ const Hero = () => {
     <section className='[--p:0]' ref={scene}>
       <div
         ref={pin}
-        className='relative flex min-h-[calc(100vh-64px)] flex-col overflow-clip pt-[clamp(20px,5vh,64px)] pb-[clamp(16px,3vh,28px)] in-[.no-morph]:static'
+        className='relative flex min-h-[calc(100vh-64px)] flex-col overflow-clip pt-[clamp(16px,3vh,48px)] pb-[clamp(16px,3vh,28px)] in-[.no-morph]:static'
       >
         <div
           ref={top}
           className={cx(
             container,
-            'relative z-3 w-full pt-[clamp(8px,4vh,48px)] pb-[clamp(18px,3.4vh,36px)] max-[860px]:pt-0 max-[860px]:pb-8'
+            'relative z-3 w-full pt-[clamp(8px,2.4vh,40px)] pb-[clamp(14px,2.6vh,32px)] max-[860px]:pt-0 max-[860px]:pb-8'
           )}
         >
-          <h1 className='text-[clamp(38px,min(7.8vw,10.8vh),112px)] leading-[.96] font-bold tracking-[-.06em] text-fg'>
+          <h1 className='text-[clamp(38px,min(7.8vw,9.6vh),112px)] leading-[.96] font-bold tracking-[-.06em] text-fg'>
             {TITLE.map(({ text, delay, muted }) => (
               // each line rises out of its own mask in the intro
               <span
@@ -133,7 +144,7 @@ const Hero = () => {
           <p
             data-intro='rise'
             style={{ '--d': '.24s' }}
-            className='mt-[clamp(18px,3.6vh,36px)] flex items-center gap-4 text-[19px] leading-[1.45] tracking-[-.01em] text-muted max-[600px]:text-[17px]'
+            className='mt-[clamp(16px,3vh,32px)] flex items-center gap-4 text-[19px] leading-[1.45] tracking-[-.01em] text-muted max-[600px]:text-[17px]'
           >
             <span className='flex flex-none'>
               {FACES.map(({ src, name }, i) => (
@@ -202,11 +213,19 @@ const Hero = () => {
                   if (el) tags.current[i] = el
                 }}
               >
-                {peak.main && (
-                  <span className='size-1.5 rounded-full bg-cyan-500 shadow-[0_0_0_3px_var(--color-cyan-100)]' />
-                )}
-                {peak.label}
-                <span className='text-muted'>{`· ${peak.detail}`}</span>
+                <span className='text-[11.5px] font-medium tracking-[-.005em] text-ink/60'>
+                  {peak.summit}{' '}
+                  <span className='font-normal text-ink/35 tabular-nums'>
+                    {peak.altitude}
+                  </span>
+                </span>
+                <span className={chipClass(peak)}>
+                  {peak.main && (
+                    <span className='size-1.5 rounded-full bg-cyan-500 shadow-[0_0_0_3px_var(--color-cyan-100)]' />
+                  )}
+                  {peak.label}
+                  <span className='text-muted'>{`· ${peak.detail}`}</span>
+                </span>
               </div>
             ))}
           </div>

@@ -21,10 +21,11 @@ const Home = () => {
         <Logos />
         <Services />
         <Work />
-        <Security />
-        <Products />
-        <Process />
         <Team />
+        <Security />
+        {/* sections alternate white and tint: keep that when reordering */}
+        <Process />
+        <Products />
         <Contact />
       </main>
       <Footer />

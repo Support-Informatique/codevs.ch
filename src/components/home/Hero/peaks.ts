@@ -9,6 +9,10 @@ export interface Peak {
   y: number
   label: string
   detail: string
+  /** The real summit of the Fribourg Prealps it stands for, seen from Fribourg. */
+  summit: string
+  /** Its altitude, in metres. */
+  altitude: number
   /** The headline skill: the larger label, with a dot, lifted higher above its summit. */
   main?: boolean
 }
@@ -18,11 +22,47 @@ export interface Peak {
  * the snow edges of the drawing are all indexed in this order.
  */
 export const PEAKS: readonly Peak[] = [
-  { x: 300, y: 200, label: 'Cybersécurité', detail: 'OSCP' }, // Kaiseregg
-  { x: 610, y: 300, label: 'Hébergement', detail: 'Infomaniak' }, // La Berra
-  { x: 860, y: 160, label: 'Sites web', detail: '50+ clients', main: true }, // Vanil Noir
-  { x: 965, y: 255, label: 'Paiements', detail: 'TWINT' }, // Dent de Broc
-  { x: 1250, y: 225, label: 'Applications', detail: 'sur mesure' } // Moléson
+  {
+    x: 300,
+    y: 200,
+    label: 'Cybersécurité',
+    detail: 'OSCP',
+    summit: 'Kaiseregg',
+    altitude: 2185
+  },
+  {
+    x: 610,
+    y: 300,
+    label: 'Hébergement',
+    detail: 'Infomaniak',
+    summit: 'La Berra',
+    altitude: 1719
+  },
+  {
+    x: 860,
+    y: 160,
+    label: 'Sites web',
+    detail: '50+ clients',
+    summit: 'Vanil Noir',
+    altitude: 2389,
+    main: true
+  },
+  {
+    x: 965,
+    y: 255,
+    label: 'Paiements',
+    detail: 'TWINT',
+    summit: 'Dent de Broc',
+    altitude: 1829
+  },
+  {
+    x: 1250,
+    y: 225,
+    label: 'Applications',
+    detail: 'sur mesure',
+    summit: 'Moléson',
+    altitude: 2002
+  }
 ]
 
 export const MAIN_PEAK = PEAKS.find(peak => peak.main) ?? PEAKS[0]

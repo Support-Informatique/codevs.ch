@@ -33,31 +33,34 @@ const CLIENTS = [
 }))
 
 /**
- * An endless strip of client logos. The list is rendered twice and the track slides by half its
- * width, so the loop has no seam; the copy is hidden from screen readers.
+ * An endless strip of client logos, right under the hero's numbers and wider than them: the
+ * summit, the numbers row and the full-bleed strip widen step by step. The list is rendered
+ * twice and the track slides by half its width, so the loop has no seam; the copy is hidden
+ * from screen readers.
  */
 const Logos = () => (
-  <section className='pt-16 pb-2 text-center'>
-    <div className={container}>
-      <p className={monoLabel}>Ils nous ont fait confiance</p>
-      <div className='group mt-6.5 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]'>
-        <div className='flex w-max animate-marquee items-center gap-14 group-hover:[animation-play-state:paused]'>
-          {[false, true].map(copy =>
-            CLIENTS.map(({ name, src }) => (
-              <img
-                key={`${name}${copy ? '-copy' : ''}`}
-                src={src}
-                alt={copy ? '' : name}
-                aria-hidden={copy || undefined}
-                loading='lazy'
-                className={cx(
-                  'h-10 w-auto max-w-32.5 object-contain opacity-55 grayscale contrast-[.9]',
-                  'transition-[filter,opacity] duration-300 hover:opacity-100 hover:filter-none'
-                )}
-              />
-            ))
-          )}
-        </div>
+  <section
+    aria-label='Ils nous ont fait confiance'
+    className='pt-11 pb-4 text-center'
+  >
+    <p className={cx(container, monoLabel)}>Ils nous ont fait confiance</p>
+    <div className='group mt-6 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]'>
+      <div className='flex w-max animate-marquee items-center gap-16 pr-16 group-hover:[animation-play-state:paused] max-[600px]:gap-11 max-[600px]:pr-11'>
+        {[false, true].map(copy =>
+          CLIENTS.map(({ name, src }) => (
+            <img
+              key={`${name}${copy ? '-copy' : ''}`}
+              src={src}
+              alt={copy ? '' : name}
+              aria-hidden={copy || undefined}
+              loading='lazy'
+              className={cx(
+                'h-12 w-auto max-w-34 object-contain opacity-60 mix-blend-multiply grayscale contrast-[.9] max-[600px]:h-10',
+                'transition-[filter,opacity] duration-300 hover:opacity-100 hover:filter-none'
+              )}
+            />
+          ))
+        )}
       </div>
     </div>
   </section>
