@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -35,7 +35,10 @@
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="CODEVS : sites web, applications et cybersécurité, à Fribourg" />
+    <meta
+      property="og:image:alt"
+      content="CODEVS : sites web, applications et cybersécurité, à Fribourg"
+    />
     <meta property="og:locale" content="fr_CH" />
     <meta property="og:site_name" content="CODEVS Sàrl" />
 
@@ -50,7 +53,10 @@
       content="Sites web, applications et systèmes de vente sur mesure, tests d’intrusion et audits de sécurité. Agence à Fribourg pour toute la Suisse romande."
     />
     <meta name="twitter:image" content="https://codevs.ch/og-image.png" />
-    <meta name="twitter:image:alt" content="CODEVS : sites web, applications et cybersécurité, à Fribourg" />
+    <meta
+      name="twitter:image:alt"
+      content="CODEVS : sites web, applications et cybersécurité, à Fribourg"
+    />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -67,6 +73,24 @@
           "postalCode": "1700",
           "addressCountry": "CH"
         }
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap"
+    />
+
+    <!-- Hero intro: hides what the intro animates before the first paint; the 3 s timer
+         is a fail-safe that shows everything (src/components/home/Hero/useIntroPen.ts) -->
+    <script>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('intro')
+        setTimeout(function () {
+          document.documentElement.classList.add('intro-go', 'intro-end')
+        }, 3000)
       }
     </script>
 
